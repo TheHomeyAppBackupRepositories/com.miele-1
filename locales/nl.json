@@ -1,0 +1,9 @@
+{
+  "device_offline": "Dit apparaat is momenteel offline, controleer alstublieft de gateway en de netwerkverbinding",
+  "device_removed": "Dit apparaat is niet meer beschikbaar, overweeg om het ook van Homey te verwijderen",
+  "unknown": "Onbekend",
+  "unknown_program": "Onbekend programma, hersynchroniseer in de onderhoudsacties",
+  "cooking_zone_number": "Kookzone __number__ niveau",
+  "not_supported": "Actie niet ondersteund door dit apparaat",
+  "command_failed": "Actie mislukt"
+}

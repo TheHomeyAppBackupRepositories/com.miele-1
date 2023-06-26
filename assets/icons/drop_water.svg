@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="100"
+   viewBox="0 0 2217.3 2217.3"
+   version="1.1"
+   id="svg1169"
+   sodipodi:docname="drop_water.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1173" />
+  <sodipodi:namedview
+     id="namedview1171"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.015"
+     inkscape:cx="-72.906404"
+     inkscape:cy="258.12808"
+     inkscape:window-width="1920"
+     inkscape:window-height="992"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1169" />
+  <path
+     class="fil1"
+     d="m 1455.0686,1218.4065 c 68.5977,164.634 92.6069,243.522 92.6069,329.269 0,243.522 -195.5036,439.026 -439.0256,439.026 -243.5219,0 -439.0255,-195.504 -439.0255,-439.026 0,-85.747 24.0093,-164.635 92.607,-329.269 l 346.4185,-819.743 z m -895.2005,-85.747 c -89.1771,212.653 -109.7564,305.26 -109.7564,415.016 0,363.569 294.9703,658.538 658.5382,658.538 363.5682,0 658.5384,-294.969 658.5384,-658.538 0,-109.756 -20.5793,-202.363 -109.7564,-415.016 L 1211.5466,79.6835 c -17.1494,-37.728 -51.4482,-68.597 -102.8967,-68.597 -51.4482,0 -85.7471,30.869 -102.8965,68.597 z"
+     id="path6"
+     style="fill:#000000;fill-opacity:1;stroke-width:1" />
+</svg>

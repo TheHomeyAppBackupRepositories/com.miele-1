@@ -1,0 +1,1 @@
+{"version":3,"file":"driver.js","sourceRoot":"","sources":["../../../drivers/fridge_freezer/driver.ts"],"names":[],"mappings":";;;;;AAAA,oFAA8E;AAE9E,MAAM,wBAAyB,SAAQ,gBAAwB;IAC7D,YAAY,CAAC,IAAY;QACvB,OAAO,IAAI,KAAK,EAAE,CAAC;IACrB,CAAC;CACF;AAED,MAAM,CAAC,OAAO,GAAG,wBAAwB,CAAC"}

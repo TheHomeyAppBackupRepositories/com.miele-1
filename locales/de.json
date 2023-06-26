@@ -1,0 +1,9 @@
+{
+  "device_offline": "Dieses Gerät ist derzeit offline, bitte überprüfen Sie das Gateway und die Netzwerkverbindung",
+  "device_removed": "Dieses Gerät ist nicht mehr verfügbar, bitte ziehen Sie in Betracht, es auch von Homey zu entfernen",
+  "unknown": "Unbekannt",
+  "unknown_program": "Unbekanntes Programm, resynchronisieren Sie in den Wartungsaktionen",
+  "cooking_zone_number": "Kochzone __number__ Stufe",
+  "not_supported": "Aktion wird von diesem Gerät nicht unterstützt",
+  "command_failed": "Aktion fehlgeschlagen"
+}
