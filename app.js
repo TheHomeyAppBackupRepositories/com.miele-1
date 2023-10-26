@@ -11,37 +11,55 @@ const eventsource_1 = __importDefault(require("eventsource"));
 source_map_support_1.default.install();
 class MieleApp extends homey_oauth2app_1.OAuth2App {
     subscribeToSSE() {
-        this.oAuthClient?.addListener('save', (...args) => {
-            this.log('Client Saved!', args);
-            const eventUrl = `${MieleApp.OAUTH2_CLIENT.API_URL}/devices/all/events`;
-            this.eventSource?.close();
-            this.eventSource = new eventsource_1.default(eventUrl, {
-                headers: {
-                    Authorization: `Bearer ${this.oAuthClient?.getToken().access_token}`,
-                    Accept: 'text/event-stream',
-                }
-            });
-            this.eventSource.onopen = (event) => {
-                this.log('SSE Opened:', event);
-            };
-            const updateDevices = async (event) => {
-                this.log('SSE device data', event.data);
-                const devicesData = JSON.parse(event.data);
-                const drivers = Object.values(this.homey.drivers.getDrivers());
-                await Promise.all(drivers.map(driver => driver.updateDeviceStates(devicesData)));
-            };
-            this.eventSource.addEventListener('devices', updateDevices);
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            this.eventSource.addEventListener('actions', async (event) => {
-                this.log('SSE device actions', event.data);
-                const actionsData = JSON.parse(event.data);
-                const drivers = Object.values(this.homey.drivers.getDrivers());
-                await Promise.all(drivers.map(driver => driver.updateDeviceActions(actionsData)));
-            });
-            this.eventSource.onerror = (event) => {
-                this.error('SSE Error:', event);
-            };
+        this.oAuthClient?.addListener('save', () => {
+            this.log('oAuth Client Saved!');
+            this.resetSSEConnection();
         });
+    }
+    resetSSEConnection() {
+        const eventUrl = `${MieleApp.OAUTH2_CLIENT.API_URL}/devices/all/events`;
+        this.eventSource?.close();
+        this.eventSource = new eventsource_1.default(eventUrl, {
+            headers: {
+                Authorization: `Bearer ${this.oAuthClient?.getToken().access_token}`,
+                Accept: 'text/event-stream',
+            }
+        });
+        this.eventSource.onopen = (event) => {
+            this.log('SSE Opened:', event);
+            this.resetSSETimeout();
+        };
+        const updateDevices = async (event) => {
+            this.log('SSE device data', event.data);
+            const devicesData = JSON.parse(event.data);
+            const drivers = Object.values(this.homey.drivers.getDrivers());
+            await Promise.all(drivers.map(driver => driver.updateDeviceStates(devicesData).catch(this.error)));
+        };
+        this.eventSource.addEventListener('devices', event => {
+            this.resetSSETimeout();
+            updateDevices(event).catch(this.error);
+        });
+        const updateActions = async (event) => {
+            this.log('SSE device actions', event.data);
+            const actionsData = JSON.parse(event.data);
+            const drivers = Object.values(this.homey.drivers.getDrivers());
+            await Promise.all(drivers.map(driver => driver.updateDeviceActions(actionsData).catch(this.error)));
+        };
+        this.eventSource.addEventListener('actions', event => {
+            this.resetSSETimeout();
+            updateActions(event).catch(this.error);
+        });
+        this.eventSource.onerror = (event) => {
+            this.error('SSE Error:', event);
+        };
+    }
+    resetSSETimeout() {
+        // Prevent the previous timeout from running out
+        this.homey.clearTimeout(this.sseTimeout);
+        this.sseTimeout = this.homey.setTimeout(() => {
+            this.log('SSE timed out!');
+            this.resetSSEConnection();
+        }, Number(homey_1.default.env.SSE_TIMEOUT_MINUTES) * 1000 * 60);
     }
     setClient(client) {
         if (!this.oAuthClient) {
@@ -121,6 +139,7 @@ class MieleApp extends homey_oauth2app_1.OAuth2App {
     async onUninit() {
         this.eventSource?.close();
         delete this.eventSource;
+        this.homey.clearTimeout(this.sseTimeout);
         await super.onUninit();
     }
 }
